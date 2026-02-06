@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 0.0,
-          "height": 1.4,
-          "width": 1.15
+          "height": 0.55,
+          "width": 1.475
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.1,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.5
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -59,54 +59,6 @@
         }
       ],
       "drc_exclusions": [
-        [
-          "clearance|159427500|107562500|d615374f-a728-41d3-8355-ca659f75ef0b|b3078023-47ea-4089-b38b-b8cdb74e0316",
-          ""
-        ],
-        [
-          "clearance|160227500|107562500|b3078023-47ea-4089-b38b-b8cdb74e0316|d928d1dc-aeda-4314-b273-57af25e112b3",
-          ""
-        ],
-        [
-          "clearance|160752500|115887500|b29e3e6d-649b-4f5d-ac29-177fb035ad93|5523bc37-804a-455c-a460-954f2984614d",
-          ""
-        ],
-        [
-          "clearance|161027500|107562500|d928d1dc-aeda-4314-b273-57af25e112b3|de39722b-e985-44fb-8673-b01446710f7f",
-          ""
-        ],
-        [
-          "clearance|161552500|115887500|3695a155-fa8b-4839-9b9e-b278d545af02|b29e3e6d-649b-4f5d-ac29-177fb035ad93",
-          ""
-        ],
-        [
-          "clearance|161827500|107562500|de39722b-e985-44fb-8673-b01446710f7f|c86244d2-9e26-4454-81dd-39284635ceac",
-          ""
-        ],
-        [
-          "clearance|162627500|107562500|c86244d2-9e26-4454-81dd-39284635ceac|90a29898-d538-4567-ad12-fdf8ff90f041",
-          ""
-        ],
-        [
-          "clearance|163152500|115887500|d52464b2-4ef5-4db8-bfcd-e8d021e8d55e|ad9b425d-bbd9-4ca2-944f-9be0215984a2",
-          ""
-        ],
-        [
-          "clearance|163477500|116360500|16848fd4-3a12-45c9-944e-acfe308bdc8f|a4f7323a-f009-4535-8470-cd18255126d0",
-          ""
-        ],
-        [
-          "clearance|163952500|115887500|a4f7323a-f009-4535-8470-cd18255126d0|b2083da7-3133-4cef-999e-8406ba13501b",
-          ""
-        ],
-        [
-          "clearance|163952500|115887500|a4f7323a-f009-4535-8470-cd18255126d0|d52464b2-4ef5-4db8-bfcd-e8d021e8d55e",
-          ""
-        ],
-        [
-          "clearance|173222308|111148462|6bcd0e63-5a46-41d3-93e5-143192a541b0|b9f6c18e-96e9-4d2d-9148-5e76bc0365f1",
-          ""
-        ],
         [
           "lib_footprint_mismatch|133872500|94727500|cd2d0f8b-a5ac-4de4-b135-2cd9b066da6c|00000000-0000-0000-0000-000000000000",
           ""
@@ -567,7 +519,7 @@
         "wire_width": 6
       },
       {
-        "clearance": 3.0,
+        "clearance": 2.5,
         "name": "Mains",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "priority": 3,
@@ -631,7 +583,35 @@
       },
       {
         "netclass": "Small power",
-        "pattern": "/Mosfet gate"
+        "pattern": "/High Drain"
+      },
+      {
+        "netclass": "Small power",
+        "pattern": "/Mid Drain"
+      },
+      {
+        "netclass": "Small power",
+        "pattern": "/Low Drain"
+      },
+      {
+        "netclass": "Small power",
+        "pattern": "/Buzz Drain"
+      },
+      {
+        "netclass": "Mains",
+        "pattern": "/LOW OUT"
+      },
+      {
+        "netclass": "Mains",
+        "pattern": "/MID OUT"
+      },
+      {
+        "netclass": "Mains",
+        "pattern": "/HIGH OUT"
+      },
+      {
+        "netclass": "Small power",
+        "pattern": "Net-(D?-K)"
       }
     ]
   },
@@ -651,7 +631,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
-    "bom_export_filename": "${PROJECTNAME}.csv",
+    "bom_export_filename": "bom/${PROJECTNAME}.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -749,6 +729,12 @@
           "label": "Distributor Link 3",
           "name": "Distributor Link 3",
           "show": true
+        },
+        {
+          "group_by": false,
+          "label": "Sim.Enable",
+          "name": "Sim.Enable",
+          "show": false
         }
       ],
       "filter_string": "",

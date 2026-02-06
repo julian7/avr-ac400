@@ -1,4 +1,5 @@
-gerber_to_order
 *-cache
 *-table
 *-backups
+\#auto_saved_files#
+_autosave*
