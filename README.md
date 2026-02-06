@@ -79,3 +79,7 @@ Buzzer signals:
 ## Similar projects
 
 - [AC400Controller](https://github.com/thikone/AC400Controller): drop-in replacement PCB, firmware, and 3D printed enclosure. It uses Arduino Nano as the controller.
+
+## License
+
+This project is licensed under the Creative Commons Attribution 4.0 International License. See the [LICENSE](./LICENSE.md) file for details.
