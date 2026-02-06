@@ -1,6 +1,6 @@
 # Record Power AC400 controller
 
-This repository contains a drop-in replacement PCB and firmware for the Record Power AC400 Air Filter controller.
+This repository contains a drop-in replacement PCB and firmware for the [Record Power AC400 Air Filter controller](https://www.recordpower.co.uk/product/two-stage-air-filter-with-remote-3-speeds-and-time-delay).
 
 The original AC400 controller is prone to failure due to its simplistic power supply design, which often results in various failures. While the company's support is very good, the replacement controller is still prone to the same issues.
 
