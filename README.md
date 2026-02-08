@@ -6,6 +6,10 @@ The original AC400 controller is prone to failure due to its simplistic power su
 
 This design aims to provide a solution that is more robust, and tries to keep using original parts where possible. It also uses an ATmega88pa-au microcontroller, as existing refurbishment stock.
 
+## Case design
+
+The board PCB is designed to fit into the original AC400 electronics enclosure, but there is a different LED divider grill design, which is 3D printed. The 3D model and the FreeCAD source are available in the `mechanical` directory, and it can be printed with a 3D printer.
+
 ## PCB design
 
 The PCB is designed using KiCad 9.0.7, and is available in the `hardware` directory. The form factor is designed to fit into the original AC400 enclosure, and it uses the same connectors for the fan and power supply. It relies of the Alternative Kicad Library plugin for resistor footprints. Interactive BOM is generated using the [Interactive Html Bom](Github: https://github.com/openscopeproject/InteractiveHtmlBom) plugin, and gerber file packages are generated using the [gerber to order](https://github.com/asukiaaa/gerber_to_order) plugin.
