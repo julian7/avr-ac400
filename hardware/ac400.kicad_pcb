@@ -2284,6 +2284,7 @@
 			(at 0 -0.5 0)
 			(unlocked yes)
 			(layer "F.SilkS")
+			(hide yes)
 			(uuid "0cf47a04-12a8-4d2a-b7b5-e985de574893")
 			(effects
 				(font
@@ -12591,7 +12592,7 @@
 			(net 2 "GND")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "6a5b229d-b36e-4a37-b8dd-fd8f7cadff1a")
+			(uuid "ee2c2bb8-fda1-418f-954a-8784a909ecdf")
 		)
 		(pad "2" thru_hole oval
 			(at 0 -5)
@@ -12613,7 +12614,7 @@
 			(net 33 "ON_KEY")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "edd4707b-faaf-4637-8218-80ac9f08ac10")
+			(uuid "b554070f-ec5b-4591-9fc0-76c412462d23")
 		)
 		(embedded_fonts no)
 		(model "${KICAD9_3DMODEL_DIR}/Button_Switch_THT.3dshapes/SW_PUSH-12mm.step"
@@ -19935,7 +19936,7 @@
 			(net 2 "GND")
 			(pinfunction "1")
 			(pintype "passive")
-			(uuid "a881f6aa-080f-4e52-91f4-7e430d46f90b")
+			(uuid "1c9e4159-ffc4-417d-a439-249871e5e06b")
 		)
 		(pad "2" thru_hole oval
 			(at 0 -5)
@@ -19957,7 +19958,7 @@
 			(net 38 "OFF_KEY")
 			(pinfunction "2")
 			(pintype "passive")
-			(uuid "ef6af851-0e9c-44a0-9d22-23400e64d8ab")
+			(uuid "abcc3769-097d-4bbd-a983-c71b52a5e9bb")
 		)
 		(embedded_fonts no)
 		(model "${KICAD9_3DMODEL_DIR}/Button_Switch_THT.3dshapes/SW_PUSH-12mm.step"
