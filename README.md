@@ -4,7 +4,7 @@ This repository contains a drop-in replacement PCB and firmware for the [Record 
 
 The original AC400 controller is prone to failure due to its simplistic power supply design, which often results in various failures. While the company's support is very good, the replacement controller is still prone to the same issues.
 
-This design aims to provide a solution that is more robust, and tries to keep using original parts where possible. It also uses an ATmega88pa-au microcontroller, as existing refurbishment stock.
+This design aims to provide a solution that is more robust, and tries to keep using original parts where possible. It also uses an ~~ATmega88PA~~ ATmega328P microcontroller, as existing refurbishment stock (note: the ATmega88 I had probably has SPIEN fuse unprogrammed, so I couldn't flash it at the end).
 
 ## Case design
 
@@ -20,7 +20,7 @@ The firmware is written in C using AVR-GCC toolchain, and it is available in the
 
 ## Flashing the firmware
 
-To flash the firmware onto the ATmega88pa-pu microcontroller, you will need an AVR programmer (e.g., USBasp, [ATMEL-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)) and AVRDUDE software.
+To flash the firmware onto the ATmega328P microcontroller, you will need an AVR programmer (e.g., USBasp, [ATMEL-ICE](https://www.microchip.com/en-us/development-tool/atatmel-ice)) and AVRDUDE software.
 
 ## Measurement points and troubleshooting
 
