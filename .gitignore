@@ -1,1 +1,3 @@
 *.FCBak
+.zig-cache
+zig-out/
