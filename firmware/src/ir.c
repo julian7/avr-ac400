@@ -80,67 +80,67 @@ bool ir_take_command(uint8_t *cmd) {
   return ready;
 }
 
-ISR(INT0_vect) {
-  uint16_t now = TCNT1;
-  uint16_t dt = (uint16_t)(now - g_ir_last_time);
-  g_ir_last_time = now;
+// ISR(INT0_vect) {
+//   uint16_t now = TCNT1;
+//   uint16_t dt = (uint16_t)(now - g_ir_last_time);
+//   g_ir_last_time = now;
 
-  uint8_t level = gpio_read(IR_PIN);
+//   uint8_t level = gpio_read(IR_PIN);
 
-  if (level) {
-    /* rising edge: end of mark */
-    if (g_ir_state == IR_IDLE) {
-      if (in_range(dt, IR_LEAD_MARK_MIN, IR_LEAD_MARK_MAX)) {
-        g_ir_state = IR_LEAD_MARK;
-      }
-    } else if (g_ir_state == IR_DATA_MARK) {
-      if (in_range(dt, IR_MARK_MIN, IR_MARK_MAX)) {
-        g_ir_state = IR_DATA_SPACE;
-      } else {
-        g_ir_state = IR_IDLE;
-      }
-    }
-  } else {
-    /* falling edge: end of space */
-    if (g_ir_state == IR_LEAD_MARK) {
-      if (in_range(dt, IR_LEAD_SPACE_MIN, IR_LEAD_SPACE_MAX)) {
-        g_ir_state = IR_DATA_MARK;
-        g_ir_bit_index = 0;
-        g_ir_data = 0;
-      } else if (in_range(dt, IR_REPEAT_SPACE_MIN, IR_REPEAT_SPACE_MAX)) {
-        /* repeat code ignored */
-        g_ir_state = IR_IDLE;
-      } else {
-        g_ir_state = IR_IDLE;
-      }
-    } else if (g_ir_state == IR_DATA_SPACE) {
-      uint8_t bit;
-      if (in_range(dt, IR_SPACE_0_MIN, IR_SPACE_0_MAX)) {
-        bit = 0;
-      } else if (in_range(dt, IR_SPACE_1_MIN, IR_SPACE_1_MAX)) {
-        bit = 1;
-      } else {
-        g_ir_state = IR_IDLE;
-        return;
-      }
+//   if (level) {
+//     /* rising edge: end of mark */
+//     if (g_ir_state == IR_IDLE) {
+//       if (in_range(dt, IR_LEAD_MARK_MIN, IR_LEAD_MARK_MAX)) {
+//         g_ir_state = IR_LEAD_MARK;
+//       }
+//     } else if (g_ir_state == IR_DATA_MARK) {
+//       if (in_range(dt, IR_MARK_MIN, IR_MARK_MAX)) {
+//         g_ir_state = IR_DATA_SPACE;
+//       } else {
+//         g_ir_state = IR_IDLE;
+//       }
+//     }
+//   } else {
+//     /* falling edge: end of space */
+//     if (g_ir_state == IR_LEAD_MARK) {
+//       if (in_range(dt, IR_LEAD_SPACE_MIN, IR_LEAD_SPACE_MAX)) {
+//         g_ir_state = IR_DATA_MARK;
+//         g_ir_bit_index = 0;
+//         g_ir_data = 0;
+//       } else if (in_range(dt, IR_REPEAT_SPACE_MIN, IR_REPEAT_SPACE_MAX)) {
+//         /* repeat code ignored */
+//         g_ir_state = IR_IDLE;
+//       } else {
+//         g_ir_state = IR_IDLE;
+//       }
+//     } else if (g_ir_state == IR_DATA_SPACE) {
+//       uint8_t bit;
+//       if (in_range(dt, IR_SPACE_0_MIN, IR_SPACE_0_MAX)) {
+//         bit = 0;
+//       } else if (in_range(dt, IR_SPACE_1_MIN, IR_SPACE_1_MAX)) {
+//         bit = 1;
+//       } else {
+//         g_ir_state = IR_IDLE;
+//         return;
+//       }
 
-      g_ir_data |= ((uint32_t)bit << g_ir_bit_index);
-      g_ir_bit_index++;
+//       g_ir_data |= ((uint32_t)bit << g_ir_bit_index);
+//       g_ir_bit_index++;
 
-      if (g_ir_bit_index >= 32) {
-        uint8_t addr = (uint8_t)(g_ir_data & 0xFF);
-        uint8_t addr_inv = (uint8_t)((g_ir_data >> 8) & 0xFF);
-        uint8_t cmd = (uint8_t)((g_ir_data >> 16) & 0xFF);
-        uint8_t cmd_inv = (uint8_t)((g_ir_data >> 24) & 0xFF);
-        if ((uint8_t)(addr ^ addr_inv) == 0xFF &&
-            (uint8_t)(cmd ^ cmd_inv) == 0xFF) {
-          g_ir_command = cmd;
-          g_ir_command_ready = true;
-        }
-        g_ir_state = IR_IDLE;
-      } else {
-        g_ir_state = IR_DATA_MARK;
-      }
-    }
-  }
-}
+//       if (g_ir_bit_index >= 32) {
+//         uint8_t addr = (uint8_t)(g_ir_data & 0xFF);
+//         uint8_t addr_inv = (uint8_t)((g_ir_data >> 8) & 0xFF);
+//         uint8_t cmd = (uint8_t)((g_ir_data >> 16) & 0xFF);
+//         uint8_t cmd_inv = (uint8_t)((g_ir_data >> 24) & 0xFF);
+//         if ((uint8_t)(addr ^ addr_inv) == 0xFF &&
+//             (uint8_t)(cmd ^ cmd_inv) == 0xFF) {
+//           g_ir_command = cmd;
+//           g_ir_command_ready = true;
+//         }
+//         g_ir_state = IR_IDLE;
+//       } else {
+//         g_ir_state = IR_DATA_MARK;
+//       }
+//     }
+//   }
+// }

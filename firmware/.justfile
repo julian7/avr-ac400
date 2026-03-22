@@ -1,6 +1,6 @@
-PROGRAMMER := env("AVRDUDE_PROGRAMMER", "linuxspi")
+PROGRAMMER := env("AVR_PROGRAMMER", "usbasp-clone")
 AVR_PART   := env("AVR_PART", "m328p")
-AVR_PORT   := env("AVR_PORT", "/dev/spidev0.0:/dev/gpiochip0:25")
+AVR_PORT   := env("AVR_PORT", "")
 AVR_FREQ   := env("AVR_FREQ", "") # lower when needed, like "128kHz"
 TARGET     := "ac400"
 

@@ -1,4 +1,4 @@
-MCU      := atmega88
+MCU      := atmega328p
 F_CPU    := 8000000UL
 CC       := avr-gcc
 OBJCOPY  := avr-objcopy

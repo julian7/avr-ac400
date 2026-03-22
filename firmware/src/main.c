@@ -155,7 +155,7 @@ static uint8_t next_timer_sel_hours(uint8_t h) {
   }
 }
 
-static void timer_rotate_from_ir(void) {
+static void rotate_timer(void) {
   g_timer_sel_hours = next_timer_sel_hours(g_timer_sel_hours);
 
   if (g_timer_sel_hours == 0) {
@@ -233,7 +233,7 @@ static void handle_command(uint8_t cmd) {
     update_leds();
     break;
   case IR_CMD_TIME:
-    timer_rotate_from_ir();
+    rotate_timer();
   }
 }
 
@@ -267,16 +267,14 @@ int main(void) {
 
       if (debounce_update(&on_db, on_raw)) {
         buzzer_start(1, BUZZER_SHORT_MS, BUZZER_GAP_MS);
-        if (g_speed == SPEED_OFF) {
-          set_speed(SPEED_LOW);
-        } else {
           set_speed(next_speed(g_speed));
         }
-      }
 
       if (debounce_update(&off_db, off_raw)) {
-        buzzer_start(1, BUZZER_SHORT_MS, BUZZER_GAP_MS);
+        if (g_speed != SPEED_OFF) {
+          buzzer_start(2, BUZZER_LONG_MS, BUZZER_GAP_MS);
         set_speed(SPEED_OFF);
+        }
         g_timer_sel_hours = 0;
         g_timer_seconds_remaining = 0;
         update_leds();
