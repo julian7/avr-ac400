@@ -6,7 +6,7 @@
 #include <stdint.h>
 
 /*
- * Board configuration: signal mappings for ATmega88PA
+ * Board configuration: signal mappings for ATmega328P
  *
  * - LEDs: PC0..PC5
  * - Buzzer: PD0

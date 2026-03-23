@@ -215,34 +215,38 @@ static void timer0_init(void) {
   TIMSK0 = (1 << OCIE0A);
 }
 
-static void handle_command(uint8_t cmd) {
-  switch (cmd) {
-  case IR_CMD_ON:
-    buzzer_start(1, BUZZER_SHORT_MS, BUZZER_GAP_MS);
-    if (g_speed == SPEED_OFF) {
-      set_speed(SPEED_LOW);
-    } else {
-      set_speed(next_speed(g_speed));
-    }
-    break;
-  case IR_CMD_OFF:
-    buzzer_start(1, BUZZER_SHORT_MS, BUZZER_GAP_MS);
-    set_speed(SPEED_OFF);
-    g_timer_sel_hours = 0;
-    g_timer_seconds_remaining = 0;
-    update_leds();
-    break;
-  case IR_CMD_TIME:
-    rotate_timer();
+ISR(TIMER0_COMPA_vect) { g_ms++; }
+
+void blink(void) {
+  gpio_write(LED6_PIN, 1);
+  for (volatile uint32_t i = 0; i < 60000UL; i++) {
+  }
+  gpio_write(LED6_PIN, 0);
+  for (volatile uint16_t i = 0; i < 30000UL; i++) {
   }
 }
 
-ISR(TIMER0_COMPA_vect) { g_ms++; }
+void on_speed(void) {
+  buzzer_start(1, BUZZER_SHORT_MS, BUZZER_GAP_MS);
+  set_speed(next_speed(g_speed));
+}
+
+void turn_off(void) {
+  if (g_speed != SPEED_OFF) {
+
+    buzzer_start(2, BUZZER_LONG_MS, BUZZER_GAP_MS);
+    set_speed(SPEED_OFF);
+  }
+  g_timer_sel_hours = 0;
+  g_timer_seconds_remaining = 0;
+  update_leds();
+}
 
 int main(void) {
   io_init();
   timer0_init();
   ir_init();
+  blink();
   sei();
 
   debounce_t on_db = {0, false};
@@ -266,18 +270,26 @@ int main(void) {
       bool off_raw = (gpio_read(OFF_KEY_PIN) == 0);
 
       if (debounce_update(&on_db, on_raw)) {
-        buzzer_start(1, BUZZER_SHORT_MS, BUZZER_GAP_MS);
-          set_speed(next_speed(g_speed));
-        }
+        on_speed();
+      }
 
       if (debounce_update(&off_db, off_raw)) {
-        if (g_speed != SPEED_OFF) {
-          buzzer_start(2, BUZZER_LONG_MS, BUZZER_GAP_MS);
-        set_speed(SPEED_OFF);
-        }
-        g_timer_sel_hours = 0;
-        g_timer_seconds_remaining = 0;
-        update_leds();
+        turn_off();
+      }
+    }
+
+    uint8_t cmd;
+    if (ir_take_command(&cmd)) {
+      switch (cmd) {
+      case IR_CMD_ON:
+        on_speed();
+        break;
+      case IR_CMD_OFF:
+        turn_off();
+        break;
+      case IR_CMD_TIME:
+        if (g_speed != SPEED_OFF)
+          rotate_timer();
       }
     }
 
@@ -293,11 +305,5 @@ int main(void) {
         update_leds();
       }
     }
-
-    uint8_t cmd;
-    if (ir_take_command(&cmd)) {
-      handle_command(cmd);
-    }
   }
-  return 0;
 }
