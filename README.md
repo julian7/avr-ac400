@@ -14,7 +14,7 @@ The 3D design and model for the case is also provided, to allow further modifica
 
 ## PCB design
 
-The PCB is designed using KiCad 9.0.7, and is available in the `hardware` directory. The form factor is designed to fit into the original AC400 enclosure, and it uses the same connectors for the fan and power supply. It relies of the Alternative Kicad Library plugin for resistor footprints. Interactive BOM is generated using the [Interactive Html Bom](Github: https://github.com/openscopeproject/InteractiveHtmlBom) plugin, and gerber file packages are generated using the [gerber to order](https://github.com/asukiaaa/gerber_to_order) plugin.
+The PCB is designed using KiCad 10, and is available in the `hardware` directory. The form factor is designed to fit into the original AC400 enclosure, and it uses the same connectors for the fan and power supply. It relies of the Alternative Kicad Library plugin for resistor footprints. Interactive BOM is generated using the [Interactive Html Bom](Github: https://github.com/openscopeproject/InteractiveHtmlBom) plugin, and gerber file packages are generated using the [gerber to order](https://github.com/asukiaaa/gerber_to_order) plugin.
 
 ## Firmware
 
