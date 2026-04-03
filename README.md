@@ -83,6 +83,18 @@ Buzzer signals:
 - Long beep with 1/2/4 short beeps: timer set to 1/2/4 hours
 - Two long beeps: Off
 
+## Build experience
+
+Building this project was quite an experience. First off, soldering the MCU was not much of a challenge, and I felt like I could handle 0603 package size too, or even 0402 if the space is tight. I would use an ESP32-C3 board if I were to do it again: that would make it remote controllable.
+
+Originally, I wanted to use an old ATmega88PA, but I couldn't even read its fuses. So that I ordered a few ATmega328P, which are pin-compatible. Fortunately, because I could made one of them a short circuit. It would've been nicer if the design accepted ATmega328PB, but I just didn't want to risk cutting wires at that point.
+
+I almost fried my Raspberry Pi4 while writing the firmware, so buying a very cheap USBASP now feels like a no brainer. It's also not that bad if you don't screw up the ISP pinout. Fortunately, I could patch it up with bodge wires. Also, there was a nasty case of weird behavior and browning out, but as it turns out that was just microzig acting up. Switching back to avr-libc made the issue go away.
+
+The original plan was to reuse the original case and the 12mm TACT switches, but I mistakenly ordered an earlier version of the PCB, where mounting holes have been placed closer together so I ended up 3D printing my own case. Later on, I even managed to break off the buttons as I tried to assemble it back together, and I only had 6x6mm switches so I ended up propping up some button spacers to be able to operate the device.
+
+All in all, I'm very happy about the outcome.  Obviously it could've been much better, but this is still well beyond my expectations.
+
 ## Similar projects
 
 - [AC400Controller](https://github.com/thikone/AC400Controller): drop-in replacement PCB, firmware, and 3D printed enclosure. It uses Arduino Nano as the controller.
